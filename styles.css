@@ -1,0 +1,1153 @@
+/* Styles pour le message d'explication */
+.explanation-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.explanation-popup.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.explanation-content {
+    background: #334155;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    color: #f8fafc;
+    max-width: 600px;
+    width: 90%;
+}
+
+.explanation-content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+.explanation-content p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.close-btn {
+    background: #2563eb;
+    color: #f8fafc;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+}
+
+.close-btn:active {
+    transform: scale(1);
+}
+
+/* Importation des polices */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: #f8fafc;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    background: #334155;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #38bdf8;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #cbd5e1;
+}
+
+.code-box {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    overflow-x: auto;
+    max-height: 200px;
+    color: #f8fafc;
+    font-family: 'Courier New', monospace;
+}
+
+pre {
+    font-size: 1rem;
+    white-space: pre-wrap;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.btn {
+    background: #2563eb;
+    color: #f8fafc;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+}
+
+.btn:active {
+    transform: scale(1);
+}
+
+.guess-section {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#languageGuess {
+    padding: 10px;
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 250px;
+}
+
+#feedback {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.feedback {
+    color: #38bdf8;
+}
+
+.feedback.correct {
+    color: #4ade80;
+}
+
+.feedback.incorrect {
+    color: #f87171;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Bouton pour aller au Shop */
+.shop-section {
+    margin-top: 20px;
+}
+
+.shop-btn {
+    background: #22c55e;
+    color: #f8fafc;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.shop-btn:hover {
+    background: #16a34a;
+    transform: scale(1.05);
+}
+
+.shop-btn:active {
+    transform: scale(1);
+}
+
+/* Section Shop */
+.shop-container {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    max-width: 800px;
+    width: 100%;
+    text-align: left;
+    color: #f8fafc;
+    font-family: 'Poppins', sans-serif;
+    display: none; /* Masqué par défaut */
+}
+
+.shop-container.hidden {
+    display: none;
+}
+
+.shop-container.visible {
+    display: block;
+}
+
+.shop-description {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.shop-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.shop-list li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.shop-contact {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+.back-btn {
+    background: #2563eb;
+    color: #f8fafc;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+}
+
+/* Section Don */
+.don-section {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    text-align: center;
+    color: #f8fafc;
+    font-family: 'Poppins', sans-serif;
+}
+
+.don-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+.don-section p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+#paypal-button-container {
+    margin-top: 20px;
+}
+
+/* Section Don */
+.don-section {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    text-align: center;
+    color: #f8fafc;
+    font-family: 'Poppins', sans-serif;
+}
+
+.don-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+.don-section p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+/* Style du bouton de Don */
+.don-btn {
+    background-color: #0070ba;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.don-btn:hover {
+    background-color: #005f8a;
+}
+
+.don-btn:active {
+    background-color: #003e5b;
+}
+
+/* Style pour la section formulaire */
+.form-section {
+    background: #1e293b;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    color: #f8fafc;
+}
+
+.form-section h3 {
+    font-size: 1.8rem;
+    color: #38bdf8;
+}
+
+.form-section textarea,
+.form-section input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.form-section textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-section input[type="file"] {
+    padding: 5px;
+}
+
+.form-section .submit-btn {
+    background-color: #38bdf8;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-section .submit-btn:hover {
+    background-color: #005f8a;
+}
+
+.form-section .submit-btn:active {
+    background-color: #003e5b;
+}
+
+/* Style pour la section formulaire */
+.form-section {
+    background: #1e293b;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    color: #f8fafc;
+}
+
+.form-section h3 {
+    font-size: 1.8rem;
+    color: #38bdf8;
+}
+
+.form-section textarea,
+.form-section input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.form-section textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-section .submit-btn {
+    background-color: #38bdf8;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-section .submit-btn:hover {
+    background-color: #005f8a;
+}
+
+.form-section .submit-btn:active {
+    background-color: #003e5b;
+}
+
+/* Style pour la section Discord */
+.discord-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.discord-btn {
+    background-color: #7289da;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.discord-btn:hover {
+    background-color: #5b6eae;
+}
+
+.discord-btn:active {
+    background-color: #4b5f8b;
+}
+
+/* Style pour le bouton rond Discord */
+.discord-section {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.discord-btn {
+    width: 60px;
+    height: 60px;
+    background-color: #7289da;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 60px;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+}
+
+.discord-btn:hover {
+    background-color: #5b6eae;
+}
+
+.discord-btn:active {
+    background-color: #4b5f8b;
+}
+
+/* Style pour le bouton rond Discord */
+.discord-section {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.discord-btn {
+    width: 60px;
+    height: 60px;
+    background-color: #7289da;
+    border-radius: 50%;
+    display: flex; /* Utilisation de Flexbox pour centrer l'icône */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+}
+
+.discord-btn i {
+    font-size: 28px; /* Taille ajustée de l'icône */
+}
+
+.discord-btn:hover {
+    background-color: #5b6eae;
+}
+
+.discord-btn:active {
+    background-color: #4b5f8b;
+}
+
+/* Style pour la section Partenaire */
+.partner-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.partner-section h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.partner-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.partner-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    text-align: center;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.partner-btn:hover {
+    opacity: 0.8;
+}
+
+/* Bouton TikTok */
+.tiktok-btn {
+    background-color: #25F4EE; /* Couleur TikTok */
+}
+
+/* Bouton Ethan */
+.ethan-btn {
+    background-color: #FF5500; /* Couleur personnalisée pour Ethan */
+}
+/* Style pour les boutons partenaires en bas à gauche */
+.partner-section {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.partner-btn {
+    display: block;
+    background-color: #333;
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, opacity 0.3s;
+    width: 150px;
+}
+
+.partner-btn:hover {
+    opacity: 0.8;
+}
+
+/* Style pour TikTok bouton */
+.tiktok-btn {
+    background-color: #25F4EE; /* Couleur TikTok */
+}
+
+/* Style pour Ethan bouton */
+.ethan-btn {
+    background-color: #FF5500; /* Couleur personnalisée */
+}
+
+/* Page dédiée pour TikTok */
+#tiktok-page {
+    display: none; /* Par défaut cachée */
+    text-align: center;
+    margin-top: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Style pour le bouton Partenaires en bas à gauche */
+.partner-section {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.partner-btn {
+    background-color: #4CAF50; /* Couleur verte pour le bouton */
+    color: white;
+    font-size: 14px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, opacity 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.partner-btn:hover {
+    background-color: #45a049;
+    opacity: 0.8;
+}
+
+/* Style pour la page Partenaires */
+#partners-page {
+    display: none; /* Cacher la page par défaut */
+    text-align: center;
+    margin-top: 50px;
+}
+
+.partners-list {
+    margin-top: 20px;
+}
+
+.partner-link {
+    display: block;
+    background-color: #25F4EE; /* Couleur TikTok */
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.partner-link:hover {
+    background-color: #1a9a9f; /* Couleur plus foncée au survol */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Style pour le bouton Retour */
+.back-btn {
+    background-color: #FF5500; /* Couleur de retour */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-top: 20px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background-color: #d74500; /* Couleur foncée au survol */
+}
+/* Style pour le bouton rond TikTok */
+.tiktok-button-container {
+    position: fixed;
+    bottom: 90px;  /* Place le bouton un peu au-dessus du bouton Discord */
+    right: 20px;  /* Aligne le bouton à droite */
+    z-index: 100;
+}
+
+.tiktok-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;  /* Taille du bouton */
+    height: 60px;
+    background-color: #000;  /* Fond noir */
+    border-radius: 50%;  /* Forme ronde */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.tiktok-btn:hover {
+    transform: scale(1.1);  /* Effet de zoom au survol */
+}
+
+.tiktok-btn img {
+    width: 35px;  /* Taille du logo TikTok ajustée */
+    height: 35px;
+    object-fit: contain;
+}
+
+.tiktok-btn:focus {
+    outline: none;
+}
+
+/* Style pour le bouton Discord (modifié) */
+.discord-button-container {
+    position: fixed;
+    bottom: 20px;  /* Position du bouton Discord en bas */
+    right: 20px;   /* Aligne le bouton à droite */
+    z-index: 100;
+}
+
+.discord-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;  /* Taille du bouton */
+    height: 60px;
+    background-color: #7289DA;  /* Couleur Discord */
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.discord-btn:hover {
+    transform: scale(1.1);  /* Effet de zoom au survol */
+}
+
+.discord-btn img {
+    width: 35px;  /* Taille du logo Discord ajustée */
+    height: 35px;
+    object-fit: contain;
+}
+
+.discord-btn:focus {
+    outline: none;
+}
+
+
+
+.footer {
+    text-align: center;
+    background-color: #111; /* Fond noir plus discret */
+    color: #aaa; /* Texte gris clair pour une apparence plus subtile */
+    padding: 5px 0; /* Hauteur réduite pour un footer plus fin */
+    font-size: 12px; /* Texte plus petit */
+    font-family: 'Poppins', sans-serif;
+    position: fixed; /* Le footer reste en bas de la page */
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    border-top: 1px solid #333; /* Ligne fine pour séparer visuellement */
+}
+
+.footer strong {
+    color: #FFD700; /* Met ton nom en doré pour le mettre en valeur */
+}
+
+/* Style du bouton Connexion */
+.login-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Popup de connexion/inscription */
+.auth-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.auth-container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    animation: fadeIn 0.3s;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.auth-container .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.auth-container .btn:hover {
+    background-color: #45a049;
+}
+
+.auth-container .switch-form span {
+    color: #007BFF;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-container .close-popup {
+    margin-top: 15px;
+    background-color: #FF3B3B;
+    color: #fff;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Cacher la popup */
+.hidden {
+    display: none;
+}
+
+/* Menu utilisateur (après connexion) */
+.user-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-menu span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.user-menu .btn {
+    background-color: #FF3B3B;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.user-menu .btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Thème clair (par défaut) */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.user-menu {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.settings {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dark-mode-label {
+    font-size: 14px;
+}
+
+/* Thème sombre */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+body.dark-mode .user-menu {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode .btn {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Style pour la zone de notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification.error {
+    background-color: #ff4d4d;
+}
+
+.notification.success {
+    background-color: #28a745;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Style pour le menu utilisateur */
+.user-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.user-menu h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.user-menu input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* Mode sombre */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .user-menu {
+    background-color: #333;
+}
+
+body.dark-mode .setting-item {
+    background-color: #444;
+    color: #fff;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+/* Styles de base */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
+.notification.show {
+    display: block;
+}
+
+/* Mode sombre */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+/* Page des paramètres */
+#settingsPage {
+    text-align: center;
+}
+
+/* Menu utilisateur */
+#userMenu {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Page d'index */
+.container {
+    text-align: center;
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Language Guesser</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Message d'explication -->
+    <div class="explanation-popup" id="explanationPopup">
+        <div class="explanation-content">
+            <h2>Bienvenue sur "Code Language Guesser" !</h2>
+            <p>🔎 Votre objectif est simple : devinez le langage du code qui s'affiche à l'écran.</p>
+            <p>🎲 Cliquez sur "Générer un Code" pour obtenir un extrait de code aléatoire.</p>
+            <p>✔️ Tapez votre réponse (par exemple : python, html, css, java) dans le champ de texte et vérifiez votre réponse.</p>
+            <button class="btn close-btn" onclick="closeExplanation()">🚀 Compris, c'est parti !</button>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>🌟 Code Language Guesser 🌟</h1>
+        <p class="subtitle">Devinez le langage du code affiché 👩‍💻👨‍💻</p>
+
+        <div class="code-box">
+            <pre id="codeOutput">// Cliquez sur "Générer" pour commencer !</pre>
+        </div>
+
+        <div class="controls">
+            <button class="btn generate-btn" onclick="generateRandomCode()">🎲 Générer un Code</button>
+        </div>
+
+        <div class="guess-section">
+            <input type="text" id="languageGuess" placeholder="Votre réponse (ex: python, html)" />
+            <button class="btn guess-btn" onclick="checkGuess()">✔️ Vérifier</button>
+        </div>
+
+        <p id="feedback" class="feedback"></p>
+
+        <!-- Bouton pour aller au Shop -->
+        <div class="shop-section">
+            <button class="btn shop-btn" onclick="goToShop()">🛒 Découvrez Mes Services</button>
+        </div>
+
+        <!-- Section Don -->
+        <div class="don-section">
+            <h2>🎉 Soutenez mon travail ! 🎉</h2>
+            <p>Si vous aimez mon projet, vous pouvez me soutenir en faisant un don ! 💖</p>
+            
+            <!-- Bouton de Don PayPal -->
+            <div id="paypal-button-container">
+                <form action="https://paypal.me/ZeixStars" method="post" target="_top">
+                    <input type="hidden" name="business" value="theisalex09@gmail.com">
+                    <input type="hidden" name="currency_code" value="USD">
+                    <button type="submit" class="don-btn">Faire un Don</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Shop -->
+    <div id="shop" class="shop-container hidden">
+        <h2>🛍️ Mes Services</h2>
+        <p class="shop-description">Découvrez mes services professionnels pour vous aider à réaliser vos projets :</p>
+        <ul class="shop-list">
+            <li>📌 <strong>Développement Web :</strong> Création de sites vitrines, applications web et plateformes sur mesure. 10€ min</li>
+            <li>🎥 <strong>Montage Vidéo  :</strong> Vidéos professionnelles pour YouTube, publicités et projets créatifs. 5€ min</li>
+            <li>💡 <strong>Consultation Technique :</strong> Assistance sur vos projets ou idées de développement. prix variable</li>
+        </ul>
+        <p class="shop-contact">💌 Intéressé ? Contactez-moi directement à : <strong>theisalex09@gmail.com</strong></p>
+
+        <!-- Formulaire pour soumettre un projet (sans fichier vidéo) -->
+        <div class="form-section">
+            <h3>🎥 Projet de Montage Vidéo</h3>
+            <p>Décrivez brièvement ce que vous voulez pour votre projet de montage vidéo.</p>
+            <form action="https://formspree.io/f/xovvyabp" method="POST">
+                <label for="projectDescription">Description du projet :</label>
+                <textarea id="projectDescription" name="projectDescription" placeholder="Décrivez votre projet ici..." required></textarea>
+                
+                <label for="email">Votre email :</label>
+                <input type="email" id="email" name="email" placeholder="Votre adresse email" required />
+                
+                <button type="submit" class="btn submit-btn">Envoyer</button>
+            </form>
+        </div>
+
+        <button class="btn back-btn" onclick="goBack()">⬅️ Retour au jeu</button>
+    </div>
+
+    <!-- Nouveau bouton rond Discord -->
+    <div class="discord-section">
+        <a href="https://discord.gg/QEJpyfduFH" target="_blank" class="discord-btn"></a>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Language Guesser</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Lien vers Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<!-- Nouveau bouton rond Discord avec icône -->
+<div class="discord-section">
+    <a href="https://discord.gg/QEJpyfduFH" target="_blank" class="discord-btn">
+        <i class="fab fa-discord"></i> <!-- Icône Discord de Font Awesome -->
+    </a>
+</div>
+
+
+</div>
+
+<!-- Bouton Partenaires en bas à gauche -->
+<div class="partner-section">
+    <a href="javascript:void(0)" onclick="goToPartnersPage()" class="partner-btn">👥 Partenaires</a>
+</div>
+
+<!-- Page Partenaires (cachée par défaut) -->
+<div id="partners-page" class="hidden">
+    <h2>🌟 Mes Partenaires 🌟</h2>
+    <p>Découvrez mes partenaires :</p>
+    <div class="partners-list">
+        <a href="https://www.tiktok.com/@hcboss1" target="_blank" class="partner-link">
+            TikTok: hcboss1
+        </a>
+        <a href="https://www.tiktok.com/@ethan.geiser2" target="_blank" class="partner-link">
+            Ethan.geiser2
+        </a>
+    </div>
+    <button class="btn back-btn" onclick="goBackToMain()">⬅️ Retour</button>
+</div>
+<!-- Bouton TikTok rond noir avec logo -->
+<div class="tiktok-button-container">
+    <a href="https://www.tiktok.com/@0iikobeii0" target="_blank" class="tiktok-btn">
+        <img src="file:///C:/Users/Maintenant%20pret/Desktop/5cb78678a7c7755bf004c14c.png" alt="TikTok Logo">
+    </a>
+</div>
+
+
+<footer class="footer">
+    <p>© <span id="currentYear"></span> Site créé par <strong>Kobe Starss</strong> | Tous droits réservés.</p>
+</footer>
+
+<!-- Bouton de connexion dans le header -->
+<button class="btn login-btn" onclick="openAuthPopup()">🔐 Connexion</button>
+
+<!-- Popup de connexion/inscription -->
+<div class="auth-popup hidden" id="authPopup">
+    <div class="auth-container">
+        <!-- Connexion -->
+        <div class="login-form" id="loginForm">
+            <h2>Connexion</h2>
+            <input type="text" id="loginUsername" placeholder="Nom d'utilisateur" required>
+            <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+            <button class="btn" onclick="login()">Se connecter</button>
+            <p class="switch-form">Pas encore inscrit ? <span onclick="showRegister()">Créer un compte</span></p>
+        </div>
+
+        <!-- Inscription -->
+        <div class="register-form hidden" id="registerForm">
+            <h2>Inscription</h2>
+            <input type="text" id="registerUsername" placeholder="Nom d'utilisateur" required>
+            <input type="password" id="registerPassword" placeholder="Mot de passe" required>
+            <button class="btn" onclick="register()">S'inscrire</button>
+            <p class="switch-form">Déjà un compte ? <span onclick="showLogin()">Se connecter</span></p>
+        </div>
+
+        <!-- Bouton pour fermer la popup -->
+        <button class="btn close-popup" onclick="closeAuthPopup()">❌ Fermer</button>
+    </div>
+</div>
+
+<!-- Bouton ou menu utilisateur -->
+<div class="user-menu" id="userMenu" style="display: none;">
+    <span id="userGreeting"></span>
+    <button class="btn" onclick="logout()">🔓 Déconnexion</button>
+</div>
+
+<!-- Popup de connexion/inscription -->
+<div class="auth-popup hidden" id="authPopup">
+    <div class="auth-container">
+        <!-- Connexion -->
+        <div class="login-form" id="loginForm">
+            <h2>Connexion</h2>
+            <input type="text" id="loginUsername" placeholder="Nom d'utilisateur" required>
+            <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+            <button class="btn" onclick="login()">Se connecter</button>
+            <p class="switch-form">Pas encore inscrit ? <span onclick="showRegister()">Créer un compte</span></p>
+        </div>
+
+        <!-- Inscription -->
+        <div class="register-form hidden" id="registerForm">
+            <h2>Inscription</h2>
+            <input type="text" id="registerUsername" placeholder="Nom d'utilisateur" required>
+            <input type="password" id="registerPassword" placeholder="Mot de passe" required>
+            <button class="btn" onclick="register()">S'inscrire</button>
+            <p class="switch-form">Déjà un compte ? <span onclick="showLogin()">Se connecter</span></p>
+        </div>
+
+        <!-- Bouton pour fermer la popup -->
+        <button class="btn close-popup" onclick="closeAuthPopup()">❌ Fermer</button>
+    </div>
+</div>
+
+<!-- Menu utilisateur avec paramètres -->
+<div class="user-menu" id="userMenu" style="display: none;">
+    <span id="userGreeting"></span>
+    <button class="btn" onclick="logout()">🔓 Déconnexion</button>
+    <div class="settings">
+        <label for="darkModeToggle" class="dark-mode-label">
+            🌙 Mode sombre
+        </label>
+        <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()" />
+    </div>
+</div>
+
+<!-- Zone de notifications -->
+<div class="notification hidden" id="notification"></div>
+
+<!-- Menu utilisateur avec paramètres -->
+<div class="user-menu" id="userMenu" style="display: none;">
+    <span id="userGreeting"></span>
+    <div class="settings">
+        <h3>⚙️ Paramètres</h3>
+        <div class="setting-item">
+            <label for="darkModeToggle" class="dark-mode-label">
+                🌙 Mode sombre
+            </label>
+            <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()" />
+        </div>
+    </div>
+    <button class="btn logout-btn" onclick="logout()">🔓 Déconnexion</button>
+</div>
+<!-- Zone de notifications -->
+<div class="notification hidden" id="notification"></div>
+
+ <!-- Page des paramètres -->
+ <div id="settingsPage" style="display: none;">
+    <h2>Paramètres</h2>
+    <button class="btn" onclick="toggleDarkMode()">Mode Sombre/Clair</button>
+    <button class="btn" onclick="goBackToMenu()">Retour au menu</button>
+</div>
+
+git init
+git add .
+git commit -m "Premier commit"
+git remote add origin https://github.com/KobeStars/-Codepage.git
+git push -u origin master
