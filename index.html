@@ -9,144 +9,94 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <div class="explanation-popup" id="explanationPopup">
         <div class="explanation-content">
             <h2>Bienvenue sur "Code Language Guesser" !</h2>
-            <p>🔎 Votre objectif est simple : devinez le langage du code qui s'affiche à l'écran.</p>
-            <p>🎲 Cliquez sur "Générer un Code" pour obtenir un extrait de code aléatoire.</p>
-            <p>✔️ Tapez votre réponse (par exemple : python, html, css, java) dans le champ de texte et vérifiez votre réponse.</p>
+            <p>🔎 Devinez le langage du code qui s'affiche à l'écran.</p>
+            <p>🎲 Cliquez sur "Générer un Code" pour commencer.</p>
             <button class="btn close-btn" id="closeExplanationBtn">🚀 Compris, c'est parti !</button>
         </div>
     </div>
 
-    <div class="container">
+    <main id="gamePage" class="page-container">
         <h1>🌟 Code Language Guesser 🌟</h1>
         <p class="subtitle">Devinez le langage du code affiché 👩‍💻👨‍💻</p>
-
         <div class="code-box">
             <pre id="codeOutput">// Cliquez sur "Générer" pour commencer !</pre>
         </div>
-
         <div class="controls">
-            <button class="btn generate-btn" id="generateCodeBtn">🎲 Générer un Code</button>
+            <button class="btn" id="generateCodeBtn">🎲 Générer un Code</button>
         </div>
-
         <div class="guess-section">
-            <input type="text" id="languageGuess" placeholder="Votre réponse (ex: python, html)" />
-            <button class="btn guess-btn" id="checkGuessBtn">✔️ Vérifier</button>
+            <input type="text" id="languageGuess" placeholder="Votre réponse (ex: python)" />
+            <button class="btn" id="checkGuessBtn">✔️ Vérifier</button>
         </div>
-
         <p id="feedback" class="feedback"></p>
-
-        <div class="shop-section">
-            <button class="btn shop-btn" id="goToShopBtn">🛒 Découvrez Mes Services</button>
+        <div class="page-nav">
+            <button class="btn shop-btn" data-target="shopPage">🛒 Découvrez Mes Services</button>
+            <button class="btn partner-btn" data-target="partnersPage">👥 Partenaires</button>
         </div>
+    </main>
 
-        <div class="don-section">
-            <h2>🎉 Soutenez mon travail ! 🎉</h2>
-            <p>Si vous aimez mon projet, vous pouvez me soutenir en faisant un don ! 💖</p>
-            <div id="paypal-button-container">
-                <form action="https://paypal.me/ZeixStars" method="post" target="_top">
-                    <input type="hidden" name="business" value="theisalex09@gmail.com">
-                    <input type="hidden" name="currency_code" value="USD">
-                    <button type="submit" class="don-btn">Faire un Don</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="shop" class="shop-container hidden">
+    <div id="shopPage" class="page-container hidden">
         <h2>🛍️ Mes Services</h2>
-        <p class="shop-description">Découvrez mes services professionnels pour vous aider à réaliser vos projets :</p>
-        <ul class="shop-list">
-            <li>📌 <strong>Développement Web :</strong> Création de sites vitrines, applications web et plateformes sur mesure. 10€ min</li>
-            <li>🎥 <strong>Montage Vidéo :</strong> Vidéos professionnelles pour YouTube, publicités et projets créatifs. 5€ min</li>
-            <li>💡 <strong>Consultation Technique :</strong> Assistance sur vos projets ou idées de développement. prix variable</li>
-        </ul>
-        <p class="shop-contact">💌 Intéressé ? Contactez-moi directement à : <strong>theisalex09@gmail.com</strong></p>
-
-        <div class="form-section">
-            <h3>🎥 Projet de Montage Vidéo</h3>
-            <p>Décrivez brièvement ce que vous voulez pour votre projet de montage vidéo.</p>
-            <form action="https://formspree.io/f/xovvyabp" method="POST">
-                <label for="projectDescription">Description du projet :</label>
-                <textarea id="projectDescription" name="projectDescription" placeholder="Décrivez votre projet ici..." required></textarea>
-                <label for="email">Votre email :</label>
-                <input type="email" id="email" name="email" placeholder="Votre adresse email" required />
-                <button type="submit" class="btn submit-btn">Envoyer</button>
-            </form>
-        </div>
-        <button class="btn back-btn" id="goBackBtn">⬅️ Retour au jeu</button>
+        <p>Développement Web, Montage Vidéo, et plus encore.</p>
+        <p class="shop-contact">Contactez-moi à : <strong>theisalex09@gmail.com</strong></p>
+        <button class="btn back-btn" data-target="gamePage">⬅️ Retour au jeu</button>
     </div>
 
-    <div class="floating-buttons">
-        <div class="partner-section">
-            <button id="goToPartnersPageBtn" class="partner-btn">👥 Partenaires</button>
-        </div>
-        <div class="discord-section">
-            <a href="https://discord.gg/QEJpyfduFH" target="_blank" class="discord-btn">
-                <i class="fab fa-discord"></i>
-            </a>
-        </div>
-        <div class="tiktok-button-container">
-            <a href="https://www.tiktok.com/@0iikobeii0" target="_blank" class="tiktok-btn">
-                <img src="https://lf16-tiktok-web.ttwstatic.com/obj/tiktok-web/tiktok/web/node/_next/static/images/logo-7328701c910ebb26925db34d942c1704.svg" alt="TikTok Logo">
-            </a>
-        </div>
-    </div>
-
-    <div id="partners-page" class="hidden">
+    <div id="partnersPage" class="page-container hidden">
         <h2>🌟 Mes Partenaires 🌟</h2>
-        <p>Découvrez mes partenaires :</p>
         <div class="partners-list">
             <a href="https://www.tiktok.com/@hcboss1" target="_blank" class="partner-link">TikTok: hcboss1</a>
             <a href="https://www.tiktok.com/@ethan.geiser2" target="_blank" class="partner-link">Ethan.geiser2</a>
         </div>
-        <button class="btn back-btn" id="goBackToMainBtn">⬅️ Retour</button>
+        <button class="btn back-btn" data-target="gamePage">⬅️ Retour au jeu</button>
     </div>
 
-    <footer class="footer">
-        <p>© <span id="currentYear"></span> Site créé par <strong>Kobe Starss</strong> | Tous droits réservés.</p>
-    </footer>
-
-    <button class="btn login-btn" id="openAuthPopupBtn">🔐 Connexion</button>
+    <div class="floating-buttons-container">
+        <a href="https://www.tiktok.com/@0iikobeii0" target="_blank" class="floating-btn tiktok-btn">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://discord.gg/QEJpyfduFH" target="_blank" class="floating-btn discord-btn">
+            <i class="fab fa-discord"></i>
+        </a>
+    </div>
+    
+    <header class="header">
+        <button class="btn login-btn" id="openAuthBtn">🔐 Connexion</button>
+        <div id="userMenu" class="user-menu hidden">
+            <span id="userGreeting"></span>
+            <button class="btn" id="logoutBtn">Déconnexion</button>
+        </div>
+    </header>
 
     <div class="auth-popup hidden" id="authPopup">
         <div class="auth-container">
-            <div id="loginForm">
+            <form id="loginForm">
                 <h2>Connexion</h2>
                 <input type="text" id="loginUsername" placeholder="Nom d'utilisateur" required>
                 <input type="password" id="loginPassword" placeholder="Mot de passe" required>
-                <button class="btn" id="loginBtn">Se connecter</button>
-                <p class="switch-form">Pas encore inscrit ? <span id="showRegisterBtn">Créer un compte</span></p>
-            </div>
-            <div id="registerForm" class="hidden">
+                <button type="submit" class="btn">Se connecter</button>
+                <p class="switch-form">Pas de compte ? <span id="showRegister">Créer un compte</span></p>
+            </form>
+            <form id="registerForm" class="hidden">
                 <h2>Inscription</h2>
                 <input type="text" id="registerUsername" placeholder="Nom d'utilisateur" required>
                 <input type="password" id="registerPassword" placeholder="Mot de passe" required>
-                <button class="btn" id="registerBtn">S'inscrire</button>
-                <p class="switch-form">Déjà un compte ? <span id="showLoginBtn">Se connecter</span></p>
-            </div>
+                <button type="submit" class="btn">S'inscrire</button>
+                <p class="switch-form">Déjà un compte ? <span id="showLogin">Se connecter</span></p>
+            </form>
             <button class="btn close-popup" id="closeAuthPopupBtn">❌ Fermer</button>
         </div>
     </div>
 
-    <div class="user-menu hidden" id="userMenu">
-        <span id="userGreeting"></span>
-        <button class="btn" id="settingsBtn">⚙️ Paramètres</button>
-        <button class="btn" id="logoutBtn">🔓 Déconnexion</button>
-    </div>
+    <footer class="footer">
+        <p>© <span id="currentYear"></span> Site créé par <strong>Kobe Starss</strong>.</p>
+    </footer>
 
-    <div id="settingsPage" class="hidden">
-        <h2>Paramètres</h2>
-        <div class="setting-item">
-            <label for="darkModeToggle">🌙 Mode sombre</label>
-            <input type="checkbox" id="darkModeToggle" />
-        </div>
-        <button class="btn" id="goBackToMenuBtn">Retour au menu</button>
-    </div>
-
-    <div class="notification hidden" id="notification"></div>
+    <div id="notification" class="notification"></div>
 
     <script src="script.js"></script>
 </body>
