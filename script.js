@@ -1,6 +1,32 @@
-// Tableau contenant des snippets de code avec leur langage associé
-const codeSnippets = [
-    // --- Python (50 snippets) ---
+document.addEventListener('DOMContentLoaded', () => {
+    // --- State Management ---
+    let currentLanguage = "";
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+    let isDarkMode = JSON.parse(localStorage.getItem('darkMode')) || false;
+
+    // --- DOM Elements ---
+    const codeOutput = document.getElementById("codeOutput");
+    const feedback = document.getElementById("feedback");
+    const languageGuess = document.getElementById("languageGuess");
+    const explanationPopup = document.getElementById("explanationPopup");
+    const container = document.querySelector(".container");
+    const shop = document.getElementById("shop");
+    const partnersPage = document.getElementById('partners-page');
+    const partnerSection = document.querySelector('.partner-section');
+    const authPopup = document.getElementById('authPopup');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const userMenu = document.getElementById('userMenu');
+    const userGreeting = document.getElementById('userGreeting');
+    const notification = document.getElementById('notification');
+    const settingsPage = document.getElementById('settingsPage');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    // --- Code Snippets ---
+    const codeSnippets = [
+        // ... (votre tableau de snippets reste inchangé) ...
+        // --- Python (50 snippets) ---
     { code: `def greet(name):\n    return f"Hello, {name}!"\nprint(greet("Alice"))`, language: "python" },
     { code: `for i in range(1, 6):\n    print(f"Number: {i}")`, language: "python" },
     { code: `def factorial(n):\n    return 1 if n == 0 else n * factorial(n - 1)\nprint(factorial(5))`, language: "python" },
@@ -54,275 +80,169 @@ const codeSnippets = [
     { code: `<button onclick="alert('Hello!')">Click Me</button>`, language: "html" },
     { code: `<form>\n    <label for="name">Name:</label>\n    <input type="text" id="name" name="name">\n</form>`, language: "html" },
     { code: `<ul>\n    <li>Item 1</li>\n    <li>Item 2</li>\n</ul>`, language: "html" }
-];
+    ];
 
-// Variable pour stocker le langage du code affiché
-let currentLanguage = "";
+    // --- Functions ---
+    const generateRandomCode = () => {
+        const randomIndex = Math.floor(Math.random() * codeSnippets.length);
+        const randomSnippet = codeSnippets[randomIndex];
+        currentLanguage = randomSnippet.language;
+        codeOutput.textContent = randomSnippet.code;
+        feedback.textContent = "";
+        languageGuess.value = "";
+    };
 
-// Fonction pour générer un code aléatoire
-function generateRandomCode() {
-    const randomIndex = Math.floor(Math.random() * codeSnippets.length);
-    const randomSnippet = codeSnippets[randomIndex];
-    currentLanguage = randomSnippet.language; // Stocke le langage
-    document.getElementById("codeOutput").textContent = randomSnippet.code;
-    document.getElementById("feedback").textContent = ""; // Réinitialise le feedback
-}
-
-// Fonction pour vérifier si la réponse est correcte
-function checkGuess() {
-    const userGuess = document.getElementById("languageGuess").value;
-    const feedback = document.getElementById("feedback");
-
-
-    if (userGuess === currentLanguage) {
-        feedback.textContent = "Bonne réponse ! 🎉";
-        feedback.className = "feedback correct"; // Ajoute la classe CSS pour feedback correct
-    } else {
-        feedback.textContent = `Mauvaise réponse. C'était du ${currentLanguage.toUpperCase()} 😢`;
-        feedback.className = "feedback incorrect"; // Ajoute la classe CSS pour feedback incorrect
-    }
-}
-
-function closeExplanation() {
-    const explanationPopup = document.getElementById("explanationPopup");
-    explanationPopup.classList.add("hidden");} // Ajoute la classe CSS pour masquer le popup  
-
-    // Fonction pour aller au Shop
-function goToShop() {
-    document.querySelector(".container").classList.add("hidden");
-    document.getElementById("shop").classList.add("visible"); }
-
-    // Fonction pour revenir au jeu
-function goBack() {
-    document.querySelector(".container").classList.remove("hidden");
-    document.getElementById("shop").classList.remove("visible");
-}
-
-// Fonction pour afficher la page des partenaires
-function goToPartnersPage() {
-    document.getElementById('partners-page').style.display = 'block';
-    document.querySelector('.partner-section').style.display = 'none'; // Cacher le bouton
-}
-
-// Fonction pour revenir à la page principale
-function goBackToMain() {
-    document.getElementById('partners-page').style.display = 'none';
-    document.querySelector('.partner-section').style.display = 'block'; // Afficher le bouton
-}
-
-// Variables pour la gestion de l'authentification
-let users = JSON.parse(localStorage.getItem('users')) || [];
-
-// Ouvrir la popup de connexion
-function openAuthPopup() {
-    document.getElementById('authPopup').classList.remove('hidden');
-}
-
-// Fermer la popup de connexion
-function closeAuthPopup() {
-    document.getElementById('authPopup').classList.add('hidden');
-}
-
-// Afficher le formulaire d'inscription
-function showRegister() {
-    document.getElementById('loginForm').classList.add('hidden');
-    document.getElementById('registerForm').classList.remove('hidden');
-}
-
-// Afficher le formulaire de connexion
-function showLogin() {
-    document.getElementById('registerForm').classList.add('hidden');
-    document.getElementById('loginForm').classList.remove('hidden');
-}
-
-// Inscription
-function register() {
-    const username = document.getElementById('registerUsername').value;
-    const password = document.getElementById('registerPassword').value;
-
-    if (username && password) {
-        const existingUser = users.find(user => user.username === username);
-        if (existingUser) {
-            alert('Nom d’utilisateur déjà pris !');
+    const checkGuess = () => {
+        const userGuess = languageGuess.value.toLowerCase().trim();
+        if (userGuess === currentLanguage) {
+            feedback.textContent = "Bonne réponse ! 🎉";
+            feedback.className = "feedback correct";
         } else {
-            users.push({ username, password });
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Inscription réussie ! Vous pouvez maintenant vous connecter.');
-            showLogin();
+            feedback.textContent = `Mauvaise réponse. C'était du ${currentLanguage.toUpperCase()} 😢`;
+            feedback.className = "feedback incorrect";
         }
-    } else {
-        alert('Veuillez remplir tous les champs.');
-    }
-}
+    };
 
-// Connexion
-function login() {
-    const username = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value;
+    const showNotification = (message, type = "success") => {
+        notification.textContent = message;
+        notification.className = `notification ${type} show`;
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    };
 
-    const user = users.find(user => user.username === username && user.password === password);
-    if (user) {
-        alert(`Bienvenue, ${username} !`);
-        currentUser = { username };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        displayUserMenu(username);
-        closeAuthPopup();
-    } else {
-        alert('Nom d’utilisateur ou mot de passe incorrect.');
-    }
-}
+    // --- Authentication Functions ---
+    const register = () => {
+        const username = document.getElementById('registerUsername').value;
+        const password = document.getElementById('registerPassword').value;
 
-// Affiche le menu utilisateur après connexion
-function displayUserMenu(username) {
-    document.getElementById('authPopup').style.display = 'none';
-    const userMenu = document.getElementById('userMenu');
-    const userGreeting = document.getElementById('userGreeting');
-
-    userMenu.style.display = 'flex';
-    userGreeting.textContent = `Bonjour, ${username}`;
-}
-
-// Déconnexion
-function logout() {
-    if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
-        localStorage.removeItem('currentUser');
-        currentUser = null;
-        document.getElementById('userMenu').style.display = 'none';
-        alert('Vous êtes maintenant déconnecté.');
-    }
-}
-// Variables pour la gestion du mode sombre
-let isDarkMode = JSON.parse(localStorage.getItem('darkMode')) || false;
-
-// Appliquer le mode sombre si activé
-window.onload = function () {
-    if (currentUser) {
-        displayUserMenu(currentUser.username);
-    }
-    if (isDarkMode) {
-        document.body.classList.add('dark-mode');
-        document.getElementById('darkModeToggle').checked = true;
-    }
-};
-
-// Basculer entre le mode sombre et le mode clair
-function toggleDarkMode() {
-    const isChecked = document.getElementById('darkModeToggle').checked;
-    if (isChecked) {
-        document.body.classList.add('dark-mode');
-        isDarkMode = true;
-    } else {
-        document.body.classList.remove('dark-mode');
-        isDarkMode = false;
-    }
-    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
-}
-
-// Affiche le menu utilisateur après connexion
-function displayUserMenu(username) {
-    document.getElementById('authPopup').style.display = 'none';
-    const userMenu = document.getElementById('userMenu');
-    const userGreeting = document.getElementById('userGreeting');
-
-    userMenu.style.display = 'flex';
-    userGreeting.textContent = `Bonjour, ${username}`;
-}
-
-// Déconnexion
-function logout() {
-    if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
-        localStorage.removeItem('currentUser');
-        currentUser = null;
-        document.getElementById('userMenu').style.display = 'none';
-        alert('Vous êtes maintenant déconnecté.');
-    }
-}
-
-// Affiche un message de notification
-function showNotification(message, type = "success") {
-    const notification = document.getElementById('notification');
-
-    // Ajout du message et du type (success ou error)
-    notification.textContent = message;
-    notification.classList.remove('hidden', 'error', 'success');
-    notification.classList.add(type, 'show');
-
-    // Cache la notification après 3 secondes
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.classList.add('hidden'), 300); // Petit délai avant de cacher complètement
-    }, 3000);
-}
-function register() {
-    const username = document.getElementById('registerUsername').value;
-    const password = document.getElementById('registerPassword').value;
-
-    if (username && password) {
-        const existingUser = users.find(user => user.username === username);
-        if (existingUser) {
-            showNotification('Nom d’utilisateur déjà pris !', 'error');
+        if (username && password) {
+            if (users.find(user => user.username === username)) {
+                showNotification('Nom d’utilisateur déjà pris !', 'error');
+            } else {
+                users.push({ username, password });
+                localStorage.setItem('users', JSON.stringify(users));
+                showNotification('Inscription réussie ! Vous pouvez maintenant vous connecter.', 'success');
+                showLogin();
+            }
         } else {
-            users.push({ username, password });
-            localStorage.setItem('users', JSON.stringify(users));
-            showNotification('Inscription réussie ! Vous pouvez maintenant vous connecter.', 'success');
-            showLogin();
+            showNotification('Veuillez remplir tous les champs.', 'error');
         }
-    } else {
-        showNotification('Veuillez remplir tous les champs.', 'error');
-    }
-}
-function login() {
-    const username = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value;
+    };
 
-    const user = users.find(user => user.username === username && user.password === password);
-    if (user) {
-        showNotification(`Bienvenue, ${username} !`, 'success');
-        currentUser = { username };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        displayUserMenu(username);
-        closeAuthPopup();
-    } else {
-        showNotification('Nom d’utilisateur ou mot de passe incorrect.', 'error');
-    }
-}
+    const login = () => {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        const user = users.find(u => u.username === username && u.password === password);
 
-function logout() {
-    localStorage.removeItem('currentUser');
-    currentUser = null;
-    document.getElementById('userMenu').style.display = 'none';
-    showNotification('Vous êtes maintenant déconnecté.', 'success');
-}
+        if (user) {
+            currentUser = { username };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            displayUserMenu(username);
+            closeAuthPopup();
+            showNotification(`Bienvenue, ${username} !`, 'success');
+        } else {
+            showNotification('Nom d’utilisateur ou mot de passe incorrect.', 'error');
+        }
+    };
 
+    const logout = () => {
+        if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            userMenu.classList.add('hidden');
+            document.getElementById('openAuthPopupBtn').classList.remove('hidden');
+            showNotification('Vous êtes maintenant déconnecté.', 'success');
+        }
+    };
+    
+    const displayUserMenu = (username) => {
+        userMenu.classList.remove('hidden');
+        userGreeting.textContent = `Bonjour, ${username}`;
+        document.getElementById('openAuthPopupBtn').classList.add('hidden');
+    };
 
+    // --- UI Navigation Functions ---
+    const closeExplanation = () => explanationPopup.classList.add("hidden");
+    const goToShop = () => {
+        container.classList.add("hidden");
+        shop.classList.remove("hidden");
+    };
+    const goBack = () => {
+        container.classList.remove("hidden");
+        shop.classList.add("hidden");
+    };
+    const goToPartnersPage = () => {
+        partnersPage.style.display = 'block';
+        partnerSection.style.display = 'none';
+    };
+    const goBackToMain = () => {
+        partnersPage.style.display = 'none';
+        partnerSection.style.display = 'block';
+    };
+    const openAuthPopup = () => authPopup.classList.remove('hidden');
+    const closeAuthPopup = () => authPopup.classList.add('hidden');
+    const showRegister = () => {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+    };
+    const showLogin = () => {
+        registerForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+    };
+    const showSettings = () => {
+        userMenu.classList.add('hidden');
+        settingsPage.classList.remove('hidden');
+    };
+    const goBackToMenu = () => {
+        settingsPage.classList.add('hidden');
+        userMenu.classList.remove('hidden');
+    };
+    
+    // --- Dark Mode ---
+    const applyDarkMode = () => {
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+        } else {
+            document.body.classList.remove('dark-mode');
+            darkModeToggle.checked = false;
+        }
+    };
 
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.classList.add('hidden'), 300);
-    }, 3000);
- 
+    const toggleDarkMode = () => {
+        isDarkMode = !isDarkMode;
+        localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+        applyDarkMode();
+    };
 
-// Basculer entre le mode sombre et normal
-function toggleDarkMode() {
-    isDarkMode = !isDarkMode;
-    if (isDarkMode) {
-        document.body.classList.add('dark-mode');
-    } else {
-        document.body.classList.remove('dark-mode');
-    }
+    // --- Event Listeners ---
+    document.getElementById('closeExplanationBtn').addEventListener('click', closeExplanation);
+    document.getElementById('generateCodeBtn').addEventListener('click', generateRandomCode);
+    document.getElementById('checkGuessBtn').addEventListener('click', checkGuess);
+    document.getElementById('goToShopBtn').addEventListener('click', goToShop);
+    document.getElementById('goBackBtn').addEventListener('click', goBack);
+    document.getElementById('goToPartnersPageBtn').addEventListener('click', goToPartnersPage);
+    document.getElementById('goBackToMainBtn').addEventListener('click', goBackToMain);
+    document.getElementById('openAuthPopupBtn').addEventListener('click', openAuthPopup);
+    document.getElementById('closeAuthPopupBtn').addEventListener('click', closeAuthPopup);
+    document.getElementById('showRegisterBtn').addEventListener('click', showRegister);
+    document.getElementById('showLoginBtn').addEventListener('click', showLogin);
+    document.getElementById('registerBtn').addEventListener('click', register);
+    document.getElementById('loginBtn').addEventListener('click', login);
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+    document.getElementById('settingsBtn').addEventListener('click', showSettings);
+    document.getElementById('goBackToMenuBtn').addEventListener('click', goBackToMenu);
+    darkModeToggle.addEventListener('change', toggleDarkMode);
 
-    // Sauvegarder la préférence du mode sombre
-    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
-}
+    // --- Initialization ---
+    const init = () => {
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        if (currentUser) {
+            displayUserMenu(currentUser.username);
+        }
+        applyDarkMode();
+    };
 
-// Afficher la page des paramètres
-function showSettings() {
-    document.getElementById('userMenu').style.display = 'none';
-    document.getElementById('settingsPage').style.display = 'block';
-}
-
-// Retour au menu utilisateur
-function goBackToMenu() {
-    document.getElementById('settingsPage').style.display = 'none';
-    document.getElementById('userMenu').style.display = 'block';
-}
+    init();
+});
